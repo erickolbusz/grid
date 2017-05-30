@@ -1,7 +1,16 @@
 # GridWorld
 
 ## Finished
--
+
+### General
+
+### Carnivores
+- Radius to find prey
+    - Radius changes with age
+
+### Herbivores
+
+### Herder
 
 ## To Do
 
@@ -10,12 +19,9 @@
 - Finish threading
 - Icons for each class
 - Add Javadocs
-- Make sure World doesn't control animals because notifying them to update
 
 ### Carnivores
 - Navigating around plants
-- Radius to find prey
-    - Radius changes with age
 - Charging at prey
 - Destroying plants
 
