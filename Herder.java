@@ -11,6 +11,14 @@ public class Herder extends Entity {
 
 	}
 
+    public void setX(int x) {
+        this.x = x;
+    }
+    
+    public void setY(int y) {
+        this.y = y;
+    }
+
     public boolean checkValidMove(Grid g, int newX, int newY) {
     //check out of bounds
         if (newX < 0 || newY < 0 || newX > g.GRID_NUM_ROWS - 1 || newY > g.GRID_NUM_COLS - 1)

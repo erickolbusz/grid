@@ -1,5 +1,5 @@
 public class Herbivore extends Animal {
-
+	private Herbivore nextHerb;
 	public Herbivore(int x, int y) {
 		super(x,y);
 	}
