@@ -22,8 +22,13 @@ public class Herder extends Entity {
                 for(int i = 0; i < 3; i++)
                     herbPack[i] = new Herbivore(x-1+i, y+1);
         }
-        
+
 	}
+
+    @Override
+    public String toString() {
+        return "O";
+    }
 
     public void setX(int x) {
         this.x = x;
