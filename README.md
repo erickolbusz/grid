@@ -9,6 +9,8 @@
 - Finish GUI
 - Finish threading
 - Icons for each class
+- Add Javadocs
+- Make sure World doesn't control animals because notifying them to update
 
 ### Carnivores
 - Navigating around plants
