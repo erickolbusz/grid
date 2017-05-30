@@ -1,4 +1,5 @@
 import java.util.Random;
+import javax.swing.*;
 
 public class World {
 	private static World w;
@@ -76,6 +77,12 @@ public class World {
     public boolean isEmpty(int x, int y) {
     	return (grid[x][y] == null);
     }
+
+    public Entity getEntity(int x, int y) {
+		if(isEmpty(x,y) == true)
+			return null;
+		return grid[x][y];
+	}
 
 
 
