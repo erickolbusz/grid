@@ -70,7 +70,6 @@ public class Display {
 			System.out.print(w);
 			System.out.print("\nClock cycle: "+clock+"\n");
 
-
 			if (rand.nextInt(10) < 9) {
 				//carnivores move 90% of the time
 				w.moveCarnivores();
@@ -92,6 +91,7 @@ public class Display {
 			if (clock == maxClock) {
 				break;
 			}
+			d.setClockCycle(clock);
 			clock++;
 
 			d.setLabelsText(w);
