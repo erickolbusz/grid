@@ -1,7 +1,15 @@
 public class Carnivore extends Animal {
+	protected int visionRadius;
+	//protected float visionScale; //animal can see perfectly within Radius then vision drops off with Scale
+	protected boolean isCharging;
+	protected final chargeDist = 5;
 
 	public Carnivore(int x, int y) {
 		super(x,y);
+
+		visionRadius = 3;
+		//visionScale = 0.5;
+
 	}
 
 	@Override
@@ -15,21 +23,51 @@ public class Carnivore extends Animal {
 	}
 
 	@Override
+	public void growOlder() {
+		age++;
+		if (age <= 10) {
+			visionRadius++;
+			//visionScale *= 0.8;
+		}
+		else {
+			visionRadius--;
+			//visionScale *= 1.2; //old carnivores 
+		}
+	}
+
+	@Override
 	public void move(Entity[][] grid) {
 		//checks to see if the carnivore can give birth, else it moves
-		boolean isBirthing = false;
+		boolean gaveBirth = giveBirth(grid);
+		if (!gaveBirth) {
+			if (isHungry()) {
+				//try to find a herbivore nearby to eat
+				boolean hunting = hunt(grid);
+				if (!hunting) {
+					//didn't find prey nearby
+					moveRandomly(grid);
+				}
+			}
+			else {
+				//not hungry
+				moveRandomly(grid);
+			}
+		}
+	}
+
+	public boolean giveBirth(Entity[][] grid) {
 		if (age >= 5 && age <= 12 && energy >= 9) {
 			//needs an empty adjacent space to spawn a new carnivore
 			for (int dx = -1; dx <= 1; dx++) {
 				for (int dy = -1; dy <= 1; dy++) {
 					try {
-						if (grid[x+dx][y+dy] == null && !isBirthing) {
+						if (grid[x+dx][y+dy] == null) {
 							//give birth
-							isBirthing = true;
 							energy = energy-4;
 							grid[x+dx][y+dy] = new Carnivore(x+dx,y+dy);
 							//newborn cannot move this cycle
 							((Animal)grid[x+dx][y+dy]).startMoving();
+							return true;
 						}
 					} catch(ArrayIndexOutOfBoundsException e) {
 						//off the grid
@@ -37,35 +75,42 @@ public class Carnivore extends Animal {
 				}
 			}
 		}
+		return false;
+	}
 
-		if (!isBirthing) {
-			//if hungry and not giving birth, try to find a herbivore nearby to eat
-			boolean isHunting = false;
-			if (isHungry()) {
-				for (int dx = -1; dx <= 1; dx++) {
-					for (int dy = -1; dy <= 1; dy++) {
-						try {
-							if (grid[x+dx][y+dy] instanceof Herbivore && !isHunting) {
-								//found adjacent herbivore
-								isHunting = true;
-								Herbivore h = (Herbivore)grid[x+dx][y+dy];
-
-								eat(h);
-								grid[x][y] = null;
-								grid[x+dx][y+dy] = this;
-								x = x+dx;
-								y = y+dy;
+	public boolean hunt(Entity[][] grid) {
+		int closestHerbivoreX = -1;
+		int closestHerbivoreY = -1;
+		int minDistSq = -1;
+		for (int dx = -1*visionRadius; dx <= visionRadius; dx++) {
+			for (int dy = -1*visionRadius; dy <= visionRadius; dy++) {
+				if (dx*dx + dy*dy <= visionRadius*visionRadius) {
+					try {
+						if (grid[x+dx][y+dy] instanceof Herbivore) {
+							//found adjacent herbivore
+							int distSq = dx*dx + dy*dy;
+							if (distSq < minDistSq) {
+								minDistSq = distSq;
 							}
-						} catch(ArrayIndexOutOfBoundsException e) {
-							//off the grid
 						}
+					} catch(ArrayIndexOutOfBoundsException e) {
+						//off the grid
 					}
 				}
 			}
-			if (!isHunting) {
-				//didn't find prey nearby
-				moveRandomly(grid);
-			}
 		}
+		if (minDistSq != -1) {
+			//nearby prey exists				
+			Herbivore h = (Herbivore)grid[x+closestHerbivoreX][y+closestHerbivoreY];
+
+			eat(h);
+			grid[x][y] = null;
+			grid[x+closestHerbivoreX][y+closestHerbivoreY] = this;
+			x = x+closestHerbivoreX;
+			y = y+closestHerbivoreX;
+			return true;
+		}
+		return false;
 	}
+
 }
