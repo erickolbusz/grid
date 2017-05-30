@@ -77,6 +77,12 @@ public class World {
     	return (grid[x][y] == null);
     }
 
+    public Entity getEntity(int x, int y) {
+		if(isEmpty(x,y) == true)
+			return null;
+		return grid[x][y];
+	}
+
 
 
     //-------------------------------------------

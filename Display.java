@@ -61,12 +61,14 @@ public class Display {
 		int clock = 1;
 		World w = World.getInstance(width, height);
 
+		DisplayGUI d = new DisplayGUI(w);
+
 		while (true) {
 			//print the world
 			System.out.print("\033[H\033[2J");
 			System.out.flush();
 			System.out.print(w);
-			System.out.print("\nClock cycle: "+clock);
+			System.out.print("\nClock cycle: "+clock+"\n");
 
 
 			if (rand.nextInt(10) < 9) {
@@ -91,6 +93,8 @@ public class Display {
 				break;
 			}
 			clock++;
+
+			d.setLabelsText(w);
 
 			//wait 400ms
 			try {
