@@ -40,7 +40,11 @@ public class Herder extends Entity {
     }
 
     public Herbivore getFirstHerb() {
-        return firstHerb;
+        return this.firstHerb;
+    }
+
+    public void setFirstHerb(Herbivore newHerb) {
+        this.firstHerb = newHerb;
     }
     @Override
     public String toString() {
@@ -55,15 +59,20 @@ public class Herder extends Entity {
         this.y = y;
     }
 
+
     public boolean checkValidMove(Entity[][] grid, int newX, int newY) {
     //check out of bounds
         if (newX < 0 || newY < 0 || newX > World.getInstance().WIDTH - 1 || newY > World.getInstance().HEIGHT - 1)
             return false;
-        if (grid[newX][newY] != null)
+        if(grid[newX][newY] instanceof Plant){
+                return true;
+        }
+        if (grid[newX][newY] != null){
             return false;
+        }
         return true;
 	}
-    
+
     public void moveUp(Entity[][] grid) {
         int X = this.getX();
         int Y = this.getY();
@@ -72,12 +81,23 @@ public class Herder extends Entity {
     	if (checkValidMove(grid, newX, newY) == true) {
             // remove entity from grid
             grid[X][Y] = null;
+            // check if food and feed
+            if(grid[newX][newY] instanceof Plant) {
+                Herbivore temp = firstHerb;
+                while(temp != null) {
+                    temp.eat(5);
+                    temp = temp.getNextHerb();
+                }
+            }
 	        this.setX(newX);
 	        this.setY(newY);
+            
             // add entity to grid
             grid[newX][newY] = this;
             // move herd
-            firstHerb.move(grid, X, Y);
+            if(firstHerb != null) {
+                firstHerb.move(grid, X, Y);
+            }
     	}
     }
 
@@ -89,11 +109,22 @@ public class Herder extends Entity {
     	if (checkValidMove(grid, newX, newY) == true) {
             // remove entity from grid
             grid[X][Y] = null;
+            // check if food and feed
+            if(grid[newX][newY] instanceof Plant) {
+                Herbivore temp = firstHerb;
+                while(temp != null) {
+                    temp.eat(5);
+                    temp = temp.getNextHerb();
+                }
+            }
             this.setX(newX);
             this.setY(newY);
+            
             // add entity to grid
             grid[newX][newY] = this;
-            firstHerb.move(grid, X, Y);
+            if(firstHerb != null) {
+                firstHerb.move(grid, X, Y);
+            }
         }
     }
 
@@ -105,11 +136,22 @@ public class Herder extends Entity {
     	if (checkValidMove(grid, newX, newY) == true) {
             // remove entity from grid
             grid[X][Y] = null;
+            // check if food and feed
+            if(grid[newX][newY] instanceof Plant) {
+                Herbivore temp = firstHerb;
+                while(temp != null) {
+                    temp.eat(5);
+                    temp = temp.getNextHerb();
+                }
+            }
             this.setX(newX);
             this.setY(newY);
+            
             // add entity to grid
             grid[newX][newY] = this;
-            firstHerb.move(grid, X, Y);
+            if(firstHerb != null) {
+                firstHerb.move(grid, X, Y);
+            }
         }
     }
 
@@ -121,11 +163,23 @@ public class Herder extends Entity {
     	if (checkValidMove(grid, newX, newY) == true) {
             // remove entity from grid
             grid[X][Y] = null;
+            // check if food and feed
+            if(grid[newX][newY] instanceof Plant) {
+                Herbivore temp = firstHerb;
+                while(temp != null) {
+                    temp.eat(5);
+                    temp = temp.getNextHerb();
+                }
+            }
             this.setX(newX);
             this.setY(newY);
+             // check if food and feed
+           
             // add entity to grid
             grid[newX][newY] = this;
-            firstHerb.move(grid, X, Y);
+            if(firstHerb != null) {
+                firstHerb.move(grid, X, Y);
+            }
         }
     }
 
