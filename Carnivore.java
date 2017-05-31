@@ -1,8 +1,10 @@
+import static java.lang.Math.sqrt;
+
 public class Carnivore extends Animal {
 	protected int visionRadius;
 	//protected float visionScale; //animal can see perfectly within Radius then vision drops off with Scale
 	protected boolean isCharging;
-	protected final chargeDist = 5;
+	protected final int chargeDist = 5;
 
 	public Carnivore(int x, int y) {
 		super(x,y);
@@ -79,8 +81,7 @@ public class Carnivore extends Animal {
 	}
 
 	public boolean hunt(Entity[][] grid) {
-		int closestHerbivoreX = -1;
-		int closestHerbivoreY = -1;
+		int closestHerbivoreX, closestHerbivoreY;
 		int minDistSq = -1;
 		for (int dx = -1*visionRadius; dx <= visionRadius; dx++) {
 			for (int dy = -1*visionRadius; dy <= visionRadius; dy++) {
@@ -100,14 +101,33 @@ public class Carnivore extends Animal {
 			}
 		}
 		if (minDistSq != -1) {
-			//nearby prey exists				
-			Herbivore h = (Herbivore)grid[x+closestHerbivoreX][y+closestHerbivoreY];
+			//nearby prey exists
+			if (closestHerbivoreX >= -1 && closestHerbivoreX <= 1 && closestHerbivoreY >= -1 && closestHerbivoreY) {
+				//adjacent prey
+				Herbivore h = (Herbivore)grid[x+closestHerbivoreX][y+closestHerbivoreY];
+				eat(h);
+				grid[x][y] = null;
+				grid[x+closestHerbivoreX][y+closestHerbivoreY] = this;
+				x = x+closestHerbivoreX;
+				y = y+closestHerbivoreX;
 
-			eat(h);
+			}
+			int dx = 0;
+			int dy = 0; 
+			if (closestHerbivoreX/Math.sqrt(minDistSq) >= 0.71) {
+				dx = 1;
+			}
+			if (closestHerbivoreX/Math.sqrt(minDistSq) <= -0.71) {
+				dx = -1;
+			}
+			if (closestHerbivoreY/Math.sqrt(minDistSq) >= 0.71) {
+				dy = 1;
+			}
+			if (closestHerbivoreY/Math.sqrt(minDistSq) <= -0.71) {
+				dy = -1;
+			}
 			grid[x][y] = null;
-			grid[x+closestHerbivoreX][y+closestHerbivoreY] = this;
-			x = x+closestHerbivoreX;
-			y = y+closestHerbivoreX;
+			grid[x+dx][y+dy] = this;
 			return true;
 		}
 		return false;
