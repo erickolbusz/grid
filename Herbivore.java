@@ -4,6 +4,10 @@ import javax.swing.JOptionPane;
 public class Herbivore extends Animal {
 	private Herbivore prevHerb, nextHerb; // following herbivore
 	Random rand = new Random();
+	/**
+    *   Constructor for Herbivore Class
+    *   @param grid grid that holds all Entities
+    */
 	public Herbivore(int x, int y) {
 		super(x,y);
 	}
@@ -12,26 +16,45 @@ public class Herbivore extends Animal {
 	public String toString() {
 		return "&";
 	}
-
+	/**
+	*	Gain energy from consuming a Plant object
+	*	@param energy energy to be gained by herbivore
+	*/
 	public void eat(int energy) {
 		this.energy += energy;
 	}
-
+	/**
+	*	Retrieve the next herbivore
+	*	@return herbivore that follows the current herbivore
+	*/
 	public Herbivore getNextHerb() {
 		return nextHerb;
 	}
-
+	/**
+	*	Retrieve the previous herbivore
+	*	@return herbivore that is followed by the current herbivore
+	*/
 	public Herbivore getPrevHerb() {
 		return prevHerb;
 	}
+	/**
+	*	Set the next herbivore
+	*	@param nextHerb herbivore to be set as the next herbivore
+	*/
 	public void setNextHerb(Herbivore nextHerb) {
 		this.nextHerb = nextHerb;
 	}
-
+	/**
+	*	Set the previous herbivore
+	*	@param prevHerb herbivore to be set as the previous herbivore
+	*/
 	public void setPrevHerb(Herbivore prevHerb) {
 		this.prevHerb = prevHerb;
 	}
-
+	/**
+	*	Used to age herbivores as they undergo a more unique process as they are connected in a linkedlist data structure
+	*	@param grid grid that holds all Entities
+	*/
 	public void age(Entity[][] grid) {
 		int X = this.getX();
 		int Y = this.getY();
@@ -65,13 +88,17 @@ public class Herbivore extends Animal {
 				if(prevHerb != null) {
 					prevHerb.setNextHerb(null);
 				} else if(prevHerb == null) { // no more herbs
-					//Herder.getInstance().setFirstHerb(null);
-					//JOptionPane.showMessageDialog(null, "All of your herbivores died. Game Over!", "GAME OVER!", JOptionPane.WARNING_MESSAGE);
+
 				}
 			}
 		}
 	}
-    			
+	/**
+	*	Move Herbivore to new coordinates
+	*	@param grid grid that holds all Entities
+	*	@param newX x coordinate for potential move
+	*	@param newY y coordinate for potential move
+	*/
 	public void move(Entity[][] grid, int newX, int newY) {
 		// following what is before int
 		int X = this.getX();
