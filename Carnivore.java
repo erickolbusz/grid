@@ -12,8 +12,9 @@ public class Carnivore extends Animal {
 	public Carnivore(int x, int y) {
 		super(x,y);
 		isCharging = false;
-		visionRadius = 3;
+		visionRadius = 8;
 		//visionScale = 0.5;
+		maxEnergy = 18;
 	}
 
 	@Override
@@ -30,7 +31,7 @@ public class Carnivore extends Animal {
 	public void growOlder() {
 		age++;
 		if (age <= 10) {
-			visionRadius++;
+			visionRadius += 2;
 			//visionScale *= 0.8;
 		}
 		else {
