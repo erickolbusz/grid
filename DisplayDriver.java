@@ -8,6 +8,12 @@ public class DisplayDriver {
 		int height = 30;
 		int maxClock = 0;
 
+		JOptionPane.showMessageDialog(null, "You are the herder. Your job is to lead your herbivores to plants.\n" +
+										"More herbivores will give birth if they are fed and are old enough.\n" +
+										"The objective of the game is to avoid the carnivores until the final cycle.\n" +
+										"Click OK to setup the dimensions of your grid.",
+									"Instructions", JOptionPane.INFORMATION_MESSAGE);
+
 		boolean received = false;
 		while (!received) {
 			String input = JOptionPane.showInputDialog("Please enter the simulation width.");
