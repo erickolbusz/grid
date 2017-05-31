@@ -4,41 +4,16 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public class Carnivore extends Animal {
-
-	/*
-	private class MoveComparator implements Comparator {
-		private int x, y;
-
-		public MoveComparator(endX, endY) {
-			this.x = endX;
-			this.y = endY;
-		}
-
-		@Override
-		public int compare(int[] move1, int[] move2) {
-			double d1 = Math.pow(x-move1[0],2) + Math.pow(y-move1[1],2);
-			double d2 = Math.pow(x-move2[0],2) + Math.pow(y-move2[1],2);
-			if (d1 < d2) {
-				return -1;
-			}
-			if (d1 > d2) {
-				return 1;
-			}
-			return 0;
-		}
-	}
-*/
 	protected int visionRadius;
 	//protected float visionScale; //animal can see perfectly within Radius then vision drops off with Scale
 	protected boolean isCharging;
-	protected final int chargeDist = 5;
+	protected final int chargeDist = 3;
 
 	public Carnivore(int x, int y) {
 		super(x,y);
 		isCharging = false;
 		visionRadius = 3;
 		//visionScale = 0.5;
-
 	}
 
 	@Override
@@ -67,19 +42,19 @@ public class Carnivore extends Animal {
 	@Override
 	public void move(Entity[][] grid) {
 		//charging takes precendence
-		if (isCharging) {
-			//energy--;
-			hunt(grid, true);
+		if (isCharging && energy >= 5) {
+			energy--; //charging makes you tired!
+			hunt(grid);
 		}
 		else {
+			//possibly too tired to keep charging
+			isCharging = false;
 			//checks to see if the carnivore can give birth, else it moves
 			boolean gaveBirth = giveBirth(grid);
 			if (!gaveBirth) {
 				if (isHungry()) {
 					//try to find a herbivore nearby to eat
-					//System.out.print(x+ " "+y+"\t");
-					boolean hunting = hunt(grid, false);
-					//System.out.println(hunting+"\n");
+					boolean hunting = hunt(grid);
 					if (!hunting) {
 						//didn't find prey nearby
 						moveRandomly(grid);
@@ -116,7 +91,7 @@ public class Carnivore extends Animal {
 		return false;
 	}
 
-	public boolean hunt(Entity[][] grid, boolean canTrample) {
+	public boolean hunt(Entity[][] grid) {
 		int closestHerbivoreX = 0;
 		int closestHerbivoreY = 0;
 		int minDistSq = Integer.MAX_VALUE;
@@ -149,7 +124,15 @@ public class Carnivore extends Animal {
 				grid[x+closestHerbivoreX][y+closestHerbivoreY] = this;
 				x = x+closestHerbivoreX;
 				y = y+closestHerbivoreY;
+				return true;
+			}
 
+			if (minDistSq <= chargeDist*chargeDist) {
+				//prey is close enough to chase
+				isCharging = true;
+			}
+			else {
+				isCharging = false;
 			}
 
 			//try all 8 moves prioritizing the path to the prey
@@ -185,7 +168,7 @@ public class Carnivore extends Animal {
 				int dx = moves[j][0];
 				int dy = moves[j][1];
 				try {
-					if (grid[x+dx][y+dy] == null || (canTrample && grid[x+dx][y+dy] instanceof Plant)) {
+					if (grid[x+dx][y+dy] == null || (isCharging && grid[x+dx][y+dy] instanceof Plant)) {
 						//empty space OR trampled plant
 						grid[x][y] = null;
 						grid[x+dx][y+dy] = this;
