@@ -2,7 +2,8 @@
 // EACH HERBIVORE
 
 public class Herder extends Entity {
-    private Herbivore[] herbPack = new Herbivore[3];
+    private static Herder h;
+    private Herbivore firstHerb;
 
 	public Herder(int x, int y, int herbDirection){
 		this.x = x;
@@ -10,21 +11,34 @@ public class Herder extends Entity {
         // herbDirection: 0 up, 1 down, 2 left, 3 right
         switch(herbDirection) {
             case 0:
-                for(int i = 0; i < 3; i++)
-                    herbPack[i] = new Herbivore(x-1, y-1+i);
+                //for(int i = 0; i < 3; i++)
+                firstHerb = new Herbivore(x-1, y);
+                break;
             case 1:
-                for(int i = 0; i < 3; i++)
-                    herbPack[i] = new Herbivore(x+1, y-1+i);
+                //for(int i = 0; i < 3; i++)
+                firstHerb = new Herbivore(x+1, y);
+                break;
             case 2:
-                for(int i = 0; i < 3; i++)
-                    herbPack[i] = new Herbivore(x-1+i, y-1);
+                //for(int i = 0; i < 3; i++)
+                firstHerb = new Herbivore(x, y-1);
+                break;
             case 3:
-                for(int i = 0; i < 3; i++)
-                    herbPack[i] = new Herbivore(x-1+i, y+1);
+                //for(int i = 0; i < 3; i++)
+                firstHerb = new Herbivore(x, y+1);
+                break;
         }
 
 	}
 
+    public static Herder getInstance(int x, int y, int herbDirection) {
+        if(h == null)
+            h = new Herder(x, y, herbDirection);
+        return h;
+    }
+    
+    public Herbivore getFirstHerb() {
+        return firstHerb;
+    }
     @Override
     public String toString() {
         return "O";
