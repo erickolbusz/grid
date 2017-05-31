@@ -55,7 +55,7 @@ public class DisplayGUI extends JFrame{
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        setSize(500, 500);
+        setSize(800, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
