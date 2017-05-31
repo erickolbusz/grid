@@ -1,4 +1,4 @@
 all: 
 	rm *.class
-	javac Display.java
-	java Display
+	javac DisplayDriver.java
+	java DisplayDriver

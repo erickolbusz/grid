@@ -3,6 +3,10 @@
 ## Finished
 
 ### General
+- Finish GUI
+- Finish threading
+- Icons for each class
+- Add Javadocs
 
 ### Carnivores
 - Radius to find prey
@@ -12,21 +16,17 @@
 - Charging at prey
 
 ### Herbivores
-
-### Herder
-
-## To Do
-
-### General
-- Finish GUI
-- Finish threading
-- Icons for each class
-- Add Javadocs
-
-### Carnivores
-
-### Herbivores
 - Grouping around herder
 
 ### Herder
 - User control
+
+## To Do
+
+### General
+
+### Carnivores
+
+### Herbivores
+
+### Herder
