@@ -64,7 +64,8 @@ public class Herbivore extends Animal {
 				if(prevHerb != null) {
 					prevHerb.setNextHerb(null);
 				} else { // no more herbs
-					Herder.getInstance().setFirstHerb(null);
+					//Herder.getInstance().setFirstHerb(null);
+					System.out.println("GAME OVER\n\n\n\n\n\n\n\n");
 				}
 			}
 		}

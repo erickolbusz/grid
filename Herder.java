@@ -111,11 +111,18 @@ public class Herder extends Entity {
             grid[X][Y] = null;
             // check if food and feed
             if(grid[newX][newY] instanceof Plant) {
-                Herbivore temp = firstHerb;
-                while(temp != null) {
-                    temp.eat(5);
-                    temp = temp.getNextHerb();
-                }
+                // Herbivore temp = firstHerb;
+                // Herbivore minHerb = temp;
+                // int min = temp.getEnergy();
+                // while(temp != null) { // find the hungriest and feed that one
+                //     if(min > temp.getEnergy()) {
+                //         min = temp.getEnergy();
+                //         minHerb = temp;
+                //     }
+                //     temp = temp.getNextHerb();
+                // }
+                // minHerb.eat(5);
+                firstHerb.eat(1);
             }
             this.setX(newX);
             this.setY(newY);
