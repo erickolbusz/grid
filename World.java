@@ -1,5 +1,4 @@
 import java.util.Random;
-import javax.swing.*;
 
 public class World {
 	private static World w;
@@ -55,6 +54,11 @@ public class World {
         	grid[x][y] = new Plant(x,y);
         }
 
+        //Herder in the middle of the grid
+        x = WIDTH/2;
+        y = HEIGHT/2;
+        grid[x][y] = Herder.getInstance(x,y,1);
+
 
     }
 
@@ -83,6 +87,11 @@ public class World {
 			return null;
 		return grid[x][y];
 	}
+
+	public Entity[][] getGrid(){
+    	return grid;
+	}
+
 
 
 
@@ -143,6 +152,8 @@ public class World {
     		for (int y = 0; y < HEIGHT; y++) {
     			if (!isEmpty(x,y)) {
     				Entity e = grid[x][y];
+    				if (e instanceof Herder)
+    					continue;
     				e.growOlder();
     				if (e.getAge() + 3*rand.nextGaussian() > e.getMaxAge()) {
     					//died from old age

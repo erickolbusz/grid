@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class DisplayGUI extends JFrame{
     private JLabel[][] labels;
@@ -30,7 +32,29 @@ public class DisplayGUI extends JFrame{
 
         c.add(top, BorderLayout.NORTH);
         c.add(grid, BorderLayout.CENTER);
-        setSize(500,500);
+        addKeyListener(new KeyListener() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                int key = e.getKeyCode();
+                if(key == KeyEvent.VK_UP) {
+                    Herder.getInstance().moveUp(world.getGrid());
+                }
+                else if(key == KeyEvent.VK_DOWN) {
+                    Herder.getInstance().moveDown(world.getGrid());
+                }
+                else if(key == KeyEvent.VK_LEFT) {
+                    Herder.getInstance().moveLeft(world.getGrid());
+                }
+                else if(key == KeyEvent.VK_RIGHT) {
+                    Herder.getInstance().moveRight(world.getGrid());
+                }
+            }
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
+        setSize(500, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
@@ -46,6 +70,8 @@ public class DisplayGUI extends JFrame{
                     labels[i][j].setText("&");
                 else if(world.getEntity(i,j) instanceof Plant)
                     labels[i][j].setText("*");
+                else if(world.getEntity(i,j) instanceof Herder)
+                    labels[i][j].setText("O");
                 else
                     labels[i][j].setText(".");
                 labels[i][j].setFont(font);

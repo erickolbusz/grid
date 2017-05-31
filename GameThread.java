@@ -68,13 +68,16 @@ class GridThread extends Thread {
 		int clock = 1;
 		World w = World.getInstance(width, height);
 
+		DisplayGUI d = new DisplayGUI(w);
+
 		while (true) {
 			//print the world
 			System.out.print("\033[H\033[2J");
 			System.out.flush();
 			System.out.print(w);
-			System.out.print("\nClock cycle: "+clock);
-
+			System.out.print("\nClock cycle: "+clock+"\n");
+			d.setClockCycle(clock);
+			d.setLabelsText(w);
 
 			if (rand.nextInt(10) < 9) {
 				//carnivores move 90% of the time
@@ -101,9 +104,9 @@ class GridThread extends Thread {
 
 			//wait 400ms
 			try {
-    			Thread.sleep(400);
+				Thread.sleep(400);
 			} catch(InterruptedException e) {
-    			Thread.currentThread().interrupt();
+				Thread.currentThread().interrupt();
 			}
 		}
 	}
@@ -117,7 +120,7 @@ class GridThread extends Thread {
 	}
 }
 
-class InputThread extends Thread {
+class InputThread extends Thread{
 	private Thread t;
 	private String name;
 
@@ -126,7 +129,6 @@ class InputThread extends Thread {
 	}
 
 	public void run() {
-
 		/* REPLACE THIS IMPLEMENTATION WITH KEYBOARD INPUTS */
 		/* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
 		/* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */

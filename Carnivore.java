@@ -2,7 +2,7 @@ public class Carnivore extends Animal {
 	protected int visionRadius;
 	//protected float visionScale; //animal can see perfectly within Radius then vision drops off with Scale
 	protected boolean isCharging;
-	protected final chargeDist = 5;
+	protected final int chargeDist = 5;
 
 	public Carnivore(int x, int y) {
 		super(x,y);
