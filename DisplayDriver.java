@@ -91,10 +91,11 @@ public class DisplayDriver {
 
 			w.moveCarnivores();
 
-			if (clock%2 == 0) {
-				//herbivores move 50% of the time
-				w.moveHerbivores();
-			}
+//			if (clock%2 == 0) {
+//				//herbivores move 50% of the time
+//				w.moveHerbivores();
+//			}
+
 			if (clock%3 == 0) {
 				//age every 3 cycles
 				w.age();
