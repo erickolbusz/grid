@@ -157,7 +157,7 @@ public class World {
     					grid[x][y] = null;
     				}
                     if (e instanceof Herbivore) {
-                        e.age(grid);
+                        ((Herbivore)e).age(grid);
                     }
     				if (e instanceof Carnivore) {
     					((Animal)e).setEnergy(((Animal)e).getEnergy()-1);
