@@ -7,6 +7,8 @@
 ### Carnivores
 - Radius to find prey
     - Radius changes with age
+- Navigating around plants
+- Destroying plants
 
 ### Herbivores
 
@@ -21,9 +23,7 @@
 - Add Javadocs
 
 ### Carnivores
-- Navigating around plants
 - Charging at prey
-- Destroying plants
 
 ### Herbivores
 - Grouping around herder
