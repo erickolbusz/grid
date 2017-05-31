@@ -5,7 +5,11 @@ public class Animal extends Entity {
 	protected int energy, maxEnergy;
 	protected boolean moving;
 	protected Random rand;
-
+	/**
+	*	Constructor for Animal Class
+	*	@param x X coordinate for Animal object
+	*	@param y Y Coordinate for Animal object
+	*/
 	public Animal(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -22,37 +26,72 @@ public class Animal extends Entity {
 
 	public void eat(Entity food) {
 	}
-
+	/**
+	* 	Retrieve energy of Animal
+	*	@return energy variable
+	*/
 	public int getEnergy() {
 		return energy;
 	}
+	/**
+	*	Set energy of Animal
+	*	@param energy amount of energy added
+	*/
 	public void setEnergy(int energy) {
 		this.energy = energy;
 	}
+	/**
+	*	Check if Animal is hungry
+	*	@return whether energy is not at capacity
+	*/
 	public boolean isHungry() {
 		return (energy < maxEnergy);
 	}
-
+	/**
+	*	Set x coordinate of Animal
+	*	@param x X coordinate
+	*/
 	public void setX(int x) {
 		this.x = x;
 	}
+	/**
+	*	Set y coordinate of Animal
+	*	@param y Y coordinate
+	*/
 	public void setY(int y) {
 		this.y = y;
 	}
-
+	/**
+	*	Move Animal
+	*	@param grid grid that holds all entities
+	*/
 	public void move(Entity[][] grid) {
 		moveRandomly(grid);
 	}
+	/**
+	*	Set animal to "finished moving"
+	*/
 	public void startMoving() {
 		moving = true;
 	}
+	/**
+	*	Check if Animal has moved already
+	*	@param x X coordinate for Animal object
+	*	@return whether animal moved or not already
+	*/
 	public boolean isMoving() {
 		return moving;
 	}
+	/**
+	*	Reset animal to "has not moved"
+	*/
 	public void stopMoving() {
 		moving = false;
 	}
-
+	/**
+	*	Moves animal randomly if there are no priority moves like eating food
+	*	@param grid grid that holds all Entities
+	*/
 	public void moveRandomly(Entity[][] grid) {
 		//moves:
 		//0 1 2

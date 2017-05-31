@@ -1,10 +1,12 @@
-// TODO: ADD THREE HERBIVORE LINKED LISTS AND ADD NEXT NODE TO 
-// EACH HERBIVORE
-
 public class Herder extends Entity {
     private static Herder h;
     private Herbivore firstHerb;
-
+    /**
+    *   Constructor for Herder (Player) Class
+    *   @param x x coordinate for Entity
+    *   @param y y coordinate for Entity
+    *   @param herbDirection tells which orientation is available to place herbivores
+    */
 	public Herder(int x, int y, int herbDirection){
 		this.x = x;
         this.y = y;
@@ -29,20 +31,36 @@ public class Herder extends Entity {
         }
 
 	}
-
+    /**
+    *   Used to retrieve singleton class instance
+    *   @return singleton class instance
+    */
     public static Herder getInstance() {
         return h;
     }
+    /**
+    *   Used to construct and retrieve singleton class instance
+    *   @param x x coordinate for instance
+    *   @param y y coordinate for instance
+    *   @param herbDirection tells which orientation is available to place herbivores
+    *   @return singleton class instance
+    */
     public static Herder getInstance(int x, int y, int herbDirection) {
         if(h == null)
             h = new Herder(x, y, herbDirection);
         return h;
     }
-
+    /**
+    *   Retrieve first herbivore following the Herder
+    *   @return first herbivore following the Herder
+    */
     public Herbivore getFirstHerb() {
         return this.firstHerb;
     }
-
+    /**
+    *   Set the first herbivore
+    *   @param newHerb herbivore that will be set as the first
+    */
     public void setFirstHerb(Herbivore newHerb) {
         this.firstHerb = newHerb;
     }
@@ -50,16 +68,28 @@ public class Herder extends Entity {
     public String toString() {
         return "O";
     }
-
+    /**
+    *   Set the x coordinate
+    *   @param x x coordinate to be set
+    */
     public void setX(int x) {
         this.x = x;
     }
-
+    /**
+    *   Set the y coordinate
+    *   @param y y coordinate to be set
+    */
     public void setY(int y) {
         this.y = y;
     }
 
-
+    /**
+    *   Check if a move command is valid
+    *   @param grid grid that holds all Entities
+    *   @param newX x coordinate for potential move
+    *   @param newY y coordinate for potential move
+    *   @return whether move can be made
+    */
     public boolean checkValidMove(Entity[][] grid, int newX, int newY) {
     //check out of bounds
         if (newX < 0 || newY < 0 || newX > World.getInstance().WIDTH - 1 || newY > World.getInstance().HEIGHT - 1)
@@ -72,7 +102,10 @@ public class Herder extends Entity {
         }
         return true;
 	}
-
+    /**
+    *   Moves Herder (Player) up in the grid
+    *   @param grid grid that holds all Entities
+    */
     public void moveUp(Entity[][] grid) {
         int X = this.getX();
         int Y = this.getY();
@@ -100,7 +133,10 @@ public class Herder extends Entity {
             }
     	}
     }
-
+    /**
+    *   Moves Herder (Player) down in the grid
+    *   @param grid grid that holds all Entities
+    */
     public void moveDown(Entity[][] grid) {
         int X = this.getX();
         int Y = this.getY();
@@ -134,7 +170,10 @@ public class Herder extends Entity {
             }
         }
     }
-
+    /**
+    *   Moves Herder (Player) left in the grid
+    *   @param grid grid that holds all Entities
+    */
     public void moveLeft(Entity[][] grid) {
         int X = this.getX();
         int Y = this.getY();
@@ -161,7 +200,10 @@ public class Herder extends Entity {
             }
         }
     }
-
+    /**
+    *   Moves Herder (Player) right in the grid
+    *   @param grid grid that holds all Entities
+    */
     public void moveRight(Entity[][] grid) {
         int X = this.getX();
         int Y = this.getY();
