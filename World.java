@@ -142,9 +142,6 @@ public class World {
     }
 
 
-
-
-
     //-------------------------------------------
 	//AGING/DYING
 	public void age() {
@@ -159,7 +156,10 @@ public class World {
     					//died from old age
     					grid[x][y] = null;
     				}
-    				if (e instanceof Animal) {
+                    if (e instanceof Herbivore) {
+                        e.age(grid);
+                    }
+    				if (e instanceof Carnivore) {
     					((Animal)e).setEnergy(((Animal)e).getEnergy()-1);
     					if (((Animal)e).getEnergy() < 1) {
     						//starved
