@@ -60,21 +60,41 @@ public class DisplayGUI extends JFrame{
     }
 
     public void setLabelsText(World world){
+        //Resize each image once, set the icons of labels later
+        int width = 1000/world.WIDTH;
+        int height = 1000/world.HEIGHT;
+        //Carnivore resize
+        ImageIcon carnivore = new ImageIcon(getClass().getResource("/icons/Carnivore.png"));
+        Image smallCarn = carnivore.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT);
+        carnivore = new ImageIcon(smallCarn);
+        //Herbivore resize
+        ImageIcon herbivore = new ImageIcon(getClass().getResource("/icons/Herbivore.png"));
+        Image smallHerb = herbivore.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT);
+        herbivore = new ImageIcon(smallHerb);
+        //Plant resize
+        ImageIcon plant = new ImageIcon(getClass().getResource("/icons/Plant.png"));
+        Image smallPlant = plant.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT);
+        plant = new ImageIcon(smallPlant);
+        //Herder resize
+        ImageIcon herder = new ImageIcon(getClass().getResource("/icons/Herder.png"));
+        Image smallHerder = herder.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT);
+        herder = new ImageIcon(smallHerder);
+        //Set images
         for(int i=0; i<labels.length; i++)
         {
             for(int j=0; j<labels[i].length; j++)
             {
                 if(world.getEntity(i,j) instanceof Carnivore) {
-                    labels[i][j].setIcon(new ImageIcon(getClass().getResource("/icons/Carnivore.png")));
+                    labels[i][j].setIcon(carnivore);
                 }
                 else if(world.getEntity(i,j) instanceof Herbivore) {
-                    labels[i][j].setIcon(new ImageIcon(getClass().getResource("/icons/Herbivore.png")));
+                    labels[i][j].setIcon(herbivore);
                 }
                 else if(world.getEntity(i,j) instanceof Plant) {
-                    labels[i][j].setIcon(new ImageIcon(getClass().getResource("/icons/Plant.png")));
+                    labels[i][j].setIcon(plant);
                 }
                 else if(world.getEntity(i,j) instanceof Herder) {
-                    labels[i][j].setIcon(new ImageIcon(getClass().getResource("/icons/Herder.png")));
+                    labels[i][j].setIcon(herder);
                 }
                 else {
                     labels[i][j].setIcon(null);
