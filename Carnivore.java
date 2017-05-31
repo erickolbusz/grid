@@ -52,19 +52,22 @@ public class Carnivore extends Animal {
 			isCharging = false;
 			//checks to see if the carnivore can give birth, else it moves
 			boolean gaveBirth = giveBirth(grid);
-			if (!gaveBirth) {
-				if (isHungry()) {
-					//try to find a herbivore nearby to eat
-					boolean hunting = hunt(grid);
-					//System.out.println(hunting+"\n");
-					if (!hunting) {
-						//didn't find prey nearby
+			//moves 90% of the time if not charging
+			if (rand.nextInt(10) < 9) {
+				if (!gaveBirth) {
+					if (isHungry()) {
+						//try to find a herbivore nearby to eat
+						boolean hunting = hunt(grid);
+						//System.out.println(hunting+"\n");
+						if (!hunting) {
+							//didn't find prey nearby
+							moveRandomly(grid);
+						}
+					}
+					else {
+						//not hungry
 						moveRandomly(grid);
 					}
-				}
-				else {
-					//not hungry
-					moveRandomly(grid);
 				}
 			}
 		}
