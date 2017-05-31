@@ -7,7 +7,6 @@ public class DisplayGUI extends JFrame{
     private JLabel[][] labels;
     private JLabel cycle;
     private JPanel top, grid;
-    private final Font font = new Font("Calibri", Font.PLAIN, 24);
 
     public DisplayGUI(World world)
     {
@@ -65,17 +64,21 @@ public class DisplayGUI extends JFrame{
         {
             for(int j=0; j<labels[i].length; j++)
             {
-                if(world.getEntity(i,j) instanceof Carnivore)
-                    labels[i][j].setText("@");
-                else if(world.getEntity(i,j) instanceof Herbivore)
-                    labels[i][j].setText("&");
-                else if(world.getEntity(i,j) instanceof Plant)
-                    labels[i][j].setText("*");
-                else if(world.getEntity(i,j) instanceof Herder)
-                    labels[i][j].setText("O");
-                else
-                    labels[i][j].setText(".");
-                labels[i][j].setFont(font);
+                if(world.getEntity(i,j) instanceof Carnivore) {
+                    labels[i][j].setIcon(new ImageIcon(getClass().getResource("/icons/Carnivore.png")));
+                }
+                else if(world.getEntity(i,j) instanceof Herbivore) {
+                    labels[i][j].setIcon(new ImageIcon(getClass().getResource("/icons/Herbivore.png")));
+                }
+                else if(world.getEntity(i,j) instanceof Plant) {
+                    labels[i][j].setIcon(new ImageIcon(getClass().getResource("/icons/Plant.png")));
+                }
+                else if(world.getEntity(i,j) instanceof Herder) {
+                    labels[i][j].setIcon(new ImageIcon(getClass().getResource("/icons/Herder.png")));
+                }
+                else {
+                    labels[i][j].setIcon(null);
+                }
             }
         }
     }

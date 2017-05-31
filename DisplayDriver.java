@@ -1,5 +1,6 @@
+import java.awt.*;
 import java.util.Random;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 public class DisplayDriver {
 	public static void main(String[] args) {
@@ -8,11 +9,23 @@ public class DisplayDriver {
 		int height = 30;
 		int maxClock = 0;
 
-		JOptionPane.showMessageDialog(null, "You are the herder. Your job is to lead your herbivores to plants.\n" +
+		JOptionPane.showMessageDialog(null,
+								"You are the herder. Your job is to lead your herbivores to plants.\n" +
 										"More herbivores will give birth if they are fed and are old enough.\n" +
 										"The objective of the game is to avoid the carnivores until the final cycle.\n" +
-										"Click OK to setup the dimensions of your grid.",
+										"Click OK to see the legend and setup the dimensions of your grid.",
 									"Instructions", JOptionPane.INFORMATION_MESSAGE);
+
+		JLabel[] icons = new JLabel[4];
+		icons[0] = new JLabel("-->Herder", new ImageIcon(DisplayDriver.class.getResource("icons/Herder.png")), JLabel.LEFT);
+		icons[1] = new JLabel("-->Herbivore", new ImageIcon(DisplayDriver.class.getResource("icons/Herbivore.png")), JLabel.LEFT);
+		icons[2] = new JLabel("-->Carnivores", new ImageIcon(DisplayDriver.class.getResource("icons/Carnivore.png")), JLabel.LEFT);
+		icons[3] = new JLabel("-->Plants", new ImageIcon(DisplayDriver.class.getResource("icons/Plant.png")), JLabel.LEFT);
+		JPanel panel = new JPanel();
+		for(int i=0; i<icons.length; i++)
+			panel.add(icons[i]);
+		panel.setSize(500,500);
+		JOptionPane.showMessageDialog(null, panel, "Legend", JOptionPane.INFORMATION_MESSAGE);
 
 		boolean received = false;
 		while (!received) {
