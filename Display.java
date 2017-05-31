@@ -1,60 +1,58 @@
 import java.util.Random;
-import java.util.Scanner;
-import java.util.InputMismatchException;
+import javax.swing.JOptionPane;
 
 public class Display {
 	public static void main(String[] args) {
 		Random rand = new Random();
-		Scanner s = new Scanner(System.in);
 		int width = 30;
 		int height = 30;
 		int maxClock = 0;
 
-		System.out.print("Please enter the simulation width: ");
 		boolean received = false;
 		while (!received) {
+			String input = JOptionPane.showInputDialog("Please enter the simulation width.");
 			try {
-				width = s.nextInt();
+				width = Integer.parseInt(input);
 				if (width <= 0) {
-					System.out.println("Please enter a positive integer.");
+					JOptionPane.showMessageDialog(null, "Please enter a positive integer.", "Error!", JOptionPane.ERROR_MESSAGE);
 				}
 				else {
 					received = true;
 				}
-			} catch (InputMismatchException e) {
-				System.out.println("Please enter a positive integer.");
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, "Please enter a positive integer.", "Error!", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 
-		System.out.print("Please enter the simulation height: ");
 		received = false;
 		while (!received) {
+			String input = JOptionPane.showInputDialog("Please enter the simulation height.");
 			try {
-				height = s.nextInt();
+				height = Integer.parseInt(input);
 				if (height <= 0) {
-					System.out.println("Please enter a positive integer.");
+					JOptionPane.showMessageDialog(null, "Please enter a positive integer.", "Error!", JOptionPane.ERROR_MESSAGE);
 				}
 				else {
 					received = true;
 				}
-			} catch (InputMismatchException e) {
-				System.out.println("Please enter a positive integer.");
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, "Please enter a positive integer.", "Error!", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 
-		System.out.print("Please enter the max number of clock cycles, or 0 for infinite: ");
 		received = false;
 		while (!received) {
+			String input = JOptionPane.showInputDialog("Please enter the max number of clock cycles, or 0 for infinite.");
 			try {
-				maxClock = s.nextInt();
+				maxClock = Integer.parseInt(input);
 				if (maxClock < 0) {
-					System.out.println("Please enter zero (for infinite) or higher.");
+					JOptionPane.showMessageDialog(null, "Please enter zero (for infinite) or higher.", "Error!", JOptionPane.ERROR_MESSAGE);
 				}
 				else {
 					received = true;
 				}
-			} catch (InputMismatchException e) {
-				System.out.println("Please enter an integer >= 0.");
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, "Please enter an integer >= 0.", "Error!", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 

@@ -48,6 +48,7 @@ public class DisplayGUI extends JFrame{
                 else if(key == KeyEvent.VK_RIGHT) {
                     Herder.getInstance().moveRight(world.getGrid());
                 }
+                setLabelsText(world);
             }
             @Override
             public void keyTyped(KeyEvent e) {}
