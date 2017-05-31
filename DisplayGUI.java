@@ -8,6 +8,10 @@ public class DisplayGUI extends JFrame{
     private JLabel cycle;
     private JPanel top, grid;
 
+    /**
+     * Constructor for DisplayGUI class
+     * @param world Instance of World passed by reference
+     */
     public DisplayGUI(World world)
     {
         super("GridWorld");
@@ -59,6 +63,10 @@ public class DisplayGUI extends JFrame{
         setVisible(true);
     }
 
+    /**
+     * Sets the text/icon of each JLabel in the GUI to the correct text/icon
+     * @param world Instance of World passed by reference
+     */
     public void setLabelsText(World world){
         //Resize each image once, set the icons of labels later
         int width = 1000/world.WIDTH;
@@ -103,6 +111,10 @@ public class DisplayGUI extends JFrame{
         }
     }
 
+    /**
+     * Sets the text for the JLabel that represents the clock cycle
+     * @param s The current clock cycle
+     */
     public void setClockCycle(int s){
         cycle.setText("Clock cycle: " + s);
     }
