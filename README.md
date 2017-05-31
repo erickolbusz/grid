@@ -9,6 +9,7 @@
     - Radius changes with age
 - Navigating around plants
 - Destroying plants
+- Charging at prey
 
 ### Herbivores
 
@@ -23,7 +24,6 @@
 - Add Javadocs
 
 ### Carnivores
-- Charging at prey
 
 ### Herbivores
 - Grouping around herder
