@@ -2,7 +2,7 @@ import java.util.Random;
 import java.util.ArrayList;
 
 public class Animal extends Entity {
-	protected int energy;
+	protected int energy, maxEnergy;
 	protected boolean moving;
 	protected Random rand;
 
@@ -10,6 +10,7 @@ public class Animal extends Entity {
 		this.x = x;
 		this.y = y;
 		maxAge = 15;
+		maxEnergy = 10;
 
 		age = 0;
 		energy = 5;
@@ -29,7 +30,7 @@ public class Animal extends Entity {
 		this.energy = energy;
 	}
 	public boolean isHungry() {
-		return (energy < 10);
+		return (energy < maxEnergy);
 	}
 
 	public void setX(int x) {

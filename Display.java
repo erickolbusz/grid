@@ -74,10 +74,10 @@ public class Display {
 				//carnivores move 90% of the time
 				w.moveCarnivores();
 			}
-			if (rand.nextInt(2) == 0) {
-				//herbivores move 50% of the time
-				w.moveHerbivores();
-			}
+			// if (rand.nextInt(2) == 0) {
+			// 	//herbivores move 50% of the time
+			// 	w.moveHerbivores();
+			// }
 			if (clock%3 == 0) {
 				//age every 3 cycles
 				w.age();
