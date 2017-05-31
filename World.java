@@ -12,6 +12,11 @@ public class World {
 	public int NUMPLAN;
 	public int PLANTSADDED;
 
+    /**
+    *   (Private) Constructor for World Class
+    *   @param grid_width width of grid that holds all Entities
+    *   @param grid_height height of grid that holds all Entities
+    */
     private World(int grid_width, int grid_height){
     	WIDTH = grid_width;
     	HEIGHT = grid_height;
@@ -66,22 +71,45 @@ public class World {
 
     //-------------------------------------------
     //GET/SET
+
+    /**
+    *   Retrieve single World instance
+    *   @return singleton World instance
+    */
     public static World getInstance() {
         if(w == null)
             w = new World(30, 30);
         return w;
     }
 
+    /**
+    *   Retrieve single World instance
+    *   @param width width of grid that holds all Entities if World is not yet instantiated
+    *   @param height height of grid that holds all Entities if World is not yet instantiated
+    *   @return singleton World instance
+    */
     public static World getInstance(int width, int height) {
         if(w == null)
             w = new World(width, height);
         return w;
     }
 
+    /**
+    *   Check if a location in the grid is empty i.e. it does not have an Entity on int
+    *   @param x X coordinate in grid (width)
+    *   @param y Y coordinate in grid (height)
+    *   @return boolean result of query
+    */
     public boolean isEmpty(int x, int y) {
     	return (grid[x][y] == null);
     }
 
+    /**
+    *   Check if a location in the grid is empty i.e. it does not have an Entity on int
+    *   @param x X coordinate in grid (width)
+    *   @param y Y coordinate in grid (height)
+    *   @return singleton World instance
+    */
     public Entity getEntity(int x, int y) {
 		if(isEmpty(x,y) == true)
 			return null;

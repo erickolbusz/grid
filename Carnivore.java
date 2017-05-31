@@ -5,41 +5,57 @@ import java.util.Comparator;
 
 public class Carnivore extends Animal {
 	protected int visionRadius;
-	//protected float visionScale; //animal can see perfectly within Radius then vision drops off with Scale
 	protected boolean isCharging;
 	protected final int chargeDist = 3;
 
+	/**
+	*	Constructor for Carnivore Class
+	*	@param x X coordinate for Carnivore object
+	*	@param y Y Coordinate for Carnivore object
+	*/
 	public Carnivore(int x, int y) {
 		super(x,y);
 		isCharging = false;
 		visionRadius = 8;
-		//visionScale = 0.5;
 		maxEnergy = 18;
 	}
 
+	/**
+	*	Print the Carnivore when displaying the World
+	*	@return String representing a Carnivore
+	*/
 	@Override
 	public String toString() {
 		return "@";
 	}
 
+	/**
+	*	Eat a Herbivore
+	*	@param h Herbivore to be eaten
+	*/
 	public void eat(Herbivore h) {
 		//eating a healty animal gives more energy
 		energy += (7 + h.getEnergy()/2);
 	}
 
+	/**
+	*	Grow older and change field of vision
+	*/
 	@Override
 	public void growOlder() {
 		age++;
 		if (age <= 10) {
-			visionRadius += 1;
-			//visionScale *= 0.8;
+			visionRadius++;
 		}
 		else {
 			visionRadius--;
-			//visionScale *= 1.2; //old carnivores 
 		}
 	}
 
+	/**
+	*	Choose and pursue an option: charging at prey, giving birth, hunting, moving randomly (in order of priority)
+	*	@param grid grid that holds all Entities
+	*/
 	@Override
 	public void move(Entity[][] grid) {
 		//charging takes precendence
@@ -73,6 +89,11 @@ public class Carnivore extends Animal {
 		}
 	}
 
+	/**
+	*	Attempt to give birth to another Carnivore
+	*	@param grid grid that holds all Entities
+	*	@return whether this Carnivore gave birth or not
+	*/
 	public boolean giveBirth(Entity[][] grid) {
 		if (age >= 5 && age <= 12 && energy >= 9) {
 			//needs an empty adjacent space to spawn a new carnivore
@@ -96,6 +117,14 @@ public class Carnivore extends Animal {
 		return false;
 	}
 
+	/**
+	*	Attempt to give hunt the nearest Herbivore by moving in its direction
+	*	Being within chargeDist of the Herbivore will cause the Carnivore to charge
+	*	Charging causes the Carnivore to trample Plants and move every clock cycle
+	*	If not charging, Carnivores maneuver around Plants
+	*	@param grid grid that holds all Entities
+	*	@return whether this Carnivore found a Herbivore to hunt within its radius of vision
+	*/
 	public boolean hunt(Entity[][] grid) {
 		int closestHerbivoreX = 0;
 		int closestHerbivoreY = 0;
