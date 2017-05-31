@@ -22,10 +22,10 @@ public class World {
     	HEIGHT = grid_height;
 		
 		int area = WIDTH*HEIGHT;
-		NUMCARN = Math.max(area/60, area/120 + 2); //making sure there are never 0
+		NUMCARN = Math.max(area/40, area/120 + 2); //making sure there are never 0
 		NUMHERB = Math.max(area/45, area/90 + 2);
-		NUMPLAN = Math.max(area/10, area/20 + 1);
-		PLANTSADDED = Math.max(area/50, area/100 + 2);
+		NUMPLAN = Math.max(area/30, area/60 + 1);
+		PLANTSADDED = Math.max(area/75, area/100 + 2);
 
         grid = new Entity[WIDTH][HEIGHT];
         rand = new Random();
@@ -105,10 +105,10 @@ public class World {
     }
 
     /**
-    *   Check if a location in the grid is empty i.e. it does not have an Entity on int
+    *   Returns the entity at a specific location on the grid
     *   @param x X coordinate in grid (width)
     *   @param y Y coordinate in grid (height)
-    *   @return singleton World instance
+    *   @return Entity at (x,y) or null if no Entity at that location
     */
     public Entity getEntity(int x, int y) {
 		if(isEmpty(x,y) == true)
@@ -116,6 +116,10 @@ public class World {
 		return grid[x][y];
 	}
 
+    /**
+    *   Returns the grid that holds all Entities
+    *   @return grid of the World which is a 2-dimensional Entity array
+    */
 	public Entity[][] getGrid(){
     	return grid;
 	}
@@ -125,6 +129,10 @@ public class World {
 
     //-------------------------------------------
     //MOVING ANIMALS
+
+    /**
+    *   Tells every Carnivore on the grid to move
+    */
     public void moveCarnivores() {
     	Carnivore a;
     	for (int x = 0; x < WIDTH; x++) {
@@ -147,6 +155,9 @@ public class World {
     	}
     }
 
+    /**
+    *   Tells every Herbivore on the grid to move
+    */
     public void moveHerbivores() {
     	Herbivore a;
     	for (int x = 0; x < WIDTH; x++) {
@@ -172,6 +183,10 @@ public class World {
 
     //-------------------------------------------
 	//AGING/DYING
+
+    /**
+    *   Tells every Animal on the grid to grow older and possibly die
+    */
 	public void age() {
     	for (int x = 0; x < WIDTH; x++) {
     		for (int y = 0; y < HEIGHT; y++) {
@@ -203,6 +218,10 @@ public class World {
 
     //-------------------------------------------
     //ADD PLANTS
+
+    /**
+    *   Adds PLANTSADDED instances of Plant to the grid
+    */
     public void addPlants() {
         //add PLANTSADDED plants
         int x, y;
@@ -220,6 +239,11 @@ public class World {
     
     //-------------------------------------------
     //TOSTRING
+
+    /**
+    *   Print the grid representing the World
+    *   @return String representing the current state of the World
+    */
     @Override
     public String toString() {
     	String s = "";
