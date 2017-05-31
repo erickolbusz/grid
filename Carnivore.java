@@ -31,7 +31,7 @@ public class Carnivore extends Animal {
 	public void growOlder() {
 		age++;
 		if (age <= 10) {
-			visionRadius += 2;
+			visionRadius += 1;
 			//visionScale *= 0.8;
 		}
 		else {
@@ -52,18 +52,22 @@ public class Carnivore extends Animal {
 			isCharging = false;
 			//checks to see if the carnivore can give birth, else it moves
 			boolean gaveBirth = giveBirth(grid);
-			if (!gaveBirth) {
-				if (isHungry()) {
-					//try to find a herbivore nearby to eat
-					boolean hunting = hunt(grid);
-					if (!hunting) {
-						//didn't find prey nearby
+			//moves 90% of the time if not charging
+			if (rand.nextInt(10) < 9) {
+				if (!gaveBirth) {
+					if (isHungry()) {
+						//try to find a herbivore nearby to eat
+						boolean hunting = hunt(grid);
+						//System.out.println(hunting+"\n");
+						if (!hunting) {
+							//didn't find prey nearby
+							moveRandomly(grid);
+						}
+					}
+					else {
+						//not hungry
 						moveRandomly(grid);
 					}
-				}
-				else {
-					//not hungry
-					moveRandomly(grid);
 				}
 			}
 		}
@@ -116,6 +120,7 @@ public class Carnivore extends Animal {
 			}
 		}
 		if (closestHerbivoreX != 0 || closestHerbivoreY != 0) {
+			//System.out.println(minDistSq+"\n");
 			//nearby prey exists
 			if (closestHerbivoreX >= -1 && closestHerbivoreX <= 1 && closestHerbivoreY >= -1 && closestHerbivoreY <= 1) {
 				//adjacent prey
@@ -150,11 +155,13 @@ public class Carnivore extends Animal {
 				}
 			}
 
+			final int herbX = closestHerbivoreX;
+			final int herbY = closestHerbivoreY;
 			Arrays.sort(moves, new Comparator<int[]>() {
 			    @Override
 			    public int compare(int[] move1, int[] move2) {
-					double d1 = Math.pow(x-move1[0],2) + Math.pow(y-move1[1],2);
-					double d2 = Math.pow(x-move2[0],2) + Math.pow(y-move2[1],2);
+					double d1 = Math.pow(herbX-move1[0],2) + Math.pow(herbY-move1[1],2);
+					double d2 = Math.pow(herbX-move2[0],2) + Math.pow(herbY-move2[1],2);
 					if (d1 < d2) {
 						return -1;
 					}

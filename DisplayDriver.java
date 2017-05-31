@@ -76,11 +76,9 @@ public class DisplayDriver {
 			d.setClockCycle(clock);
 			d.setLabelsText(w);
 
-			if (rand.nextInt(10) < 9) {
-				//carnivores move 90% of the time
-				w.moveCarnivores();
-			}
-			if (rand.nextInt(2) == 0) {
+			w.moveCarnivores();
+
+			if (clock%2 == 0) {
 				//herbivores move 50% of the time
 				w.moveHerbivores();
 			}
