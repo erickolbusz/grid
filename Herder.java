@@ -30,12 +30,15 @@ public class Herder extends Entity {
 
 	}
 
+    public static Herder getInstance() {
+        return h;
+    }
     public static Herder getInstance(int x, int y, int herbDirection) {
         if(h == null)
             h = new Herder(x, y, herbDirection);
         return h;
     }
-    
+
     public Herbivore getFirstHerb() {
         return firstHerb;
     }
@@ -73,6 +76,8 @@ public class Herder extends Entity {
 	        this.setY(newY);
             // add entity to grid
             grid[newX][newY] = this;
+            // move herd
+            firstHerb.move(grid, X, Y);
     	}
     }
 
@@ -88,6 +93,7 @@ public class Herder extends Entity {
             this.setY(newY);
             // add entity to grid
             grid[newX][newY] = this;
+            firstHerb.move(grid, X, Y);
         }
     }
 
@@ -103,6 +109,7 @@ public class Herder extends Entity {
             this.setY(newY);
             // add entity to grid
             grid[newX][newY] = this;
+            firstHerb.move(grid, X, Y);
         }
     }
 
@@ -118,6 +125,7 @@ public class Herder extends Entity {
             this.setY(newY);
             // add entity to grid
             grid[newX][newY] = this;
+            firstHerb.move(grid, X, Y);
         }
     }
 
